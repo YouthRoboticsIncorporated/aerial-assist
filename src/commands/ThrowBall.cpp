@@ -1,25 +1,12 @@
-#include "../subsystems/Catapult.h"
-#include "../Robotmap.h"
 #include "ThrowBall.h"
+#include "WinchPayout.h"
+#include "WinchRetract.h"
+#include "QuickReleaseClose.h"
+#include "QuickReleaseOpen.h"
 
-
-ThrowBall::ThrowBall():CommandBase("ThrowBall"){
-	Requires(catapult);
+ThrowBall::ThrowBall(){
+	AddSequential(new WinchPayout());
+	AddSequential(new QuickReleaseOpen());
+	AddSequential(new QuickReleaseClose());
+	AddSequential(new WinchRetract());
 }
-
-void ThrowBall::Initialize(){	
-}
-
-void ThrowBall::Execute(){
-	catapult->release();	
-}
-
-bool ThrowBall::IsFinished(){
-	return false;
-}
-
-void ThrowBall::End(){
-}
-
-void ThrowBall::Interrupted(){
-}	

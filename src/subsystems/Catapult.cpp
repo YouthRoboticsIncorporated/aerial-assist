@@ -17,48 +17,34 @@ Catapult::~Catapult() {
 	delete cataLimitSwitch;
 }
 
-void Catapult::release() {
-	cableSet();
-	qrOpen();
-	Wait (2.0);
-	qrClose();
-	winchReset();
+void Catapult::winchRetract() {
+	winchMotor->Set(WINCH_RETRACT_SPEED);
 }
 
-void Catapult::passBall() {
-	qrOpen();
-	cableSet();
-	Wait (2.0);
-	qrClose();
-	winchReset();
+void Catapult::winchPayout() {
+	winchMotor->Set(-WINCH_RETRACT_SPEED);
 }
 
-void Catapult::winchReset() {
-	winchMotor->Set(WINCH_SPEED);
-	while(cataLimitSwitch->Get()==1){
-		//Do nothing
-	}
+void Catapult::winchStop() {
 	winchMotor->Set(0.0);
 }
 
-void Catapult::cableSet() {
-	winchMotor->Set(-WINCH_SPEED);
-	Wait (0.5);
-	winchMotor->Set(0.0);
+void Catapult::qrStart() {
+	releaseMotor->Set(-1.0);
 }
 
-void Catapult::qrOpen() {
-	releaseMotor->Set(-1.0);
-    while(qrPassingLimitSwitch->Get()==1){
-    	//Do nothing.
-    }
-    releaseMotor->Set(0.0);
+void Catapult::qrStop() {
+	releaseMotor->Set(0.0);
 }
 
- void Catapult::qrClose() {
-	releaseMotor->Set(-1.0);
-    while(qrFiringLimitSwitch->Get()==1){
-    	//Do nothing.
-    }
-    releaseMotor->Set(0.0);
-}   
+bool Catapult::qrFiringSwitchPressed() {
+	return qrFiringLimitSwitch->Get()==1;
+}
+
+bool Catapult::qrPassingSwitchPressed() {
+	return qrPassingLimitSwitch->Get()==1;
+}
+
+bool Catapult::cataLimitSwitchPressed() {
+	return cataLimitSwitch->Get()==1;
+}

@@ -1,16 +1,11 @@
 #ifndef PassBall_h
 #define PassBall_h
 
-#include "../CommandBase.h"
+#include <WPILib.h>
 
-class PassBall: public CommandBase{
+class PassBall: public CommandGroup{
 	public:
 		PassBall();
-		virtual void Initialize();
-		virtual void Execute();
-		virtual bool IsFinished();
-		virtual void End();
-		virtual void Interrupted();
 };
 
 #endif

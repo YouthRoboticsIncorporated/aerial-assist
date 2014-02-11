@@ -7,8 +7,14 @@ class Catapult: public Subsystem {
 	public:
 		Catapult();
 		~Catapult();
-		void release ();
-		void passBall();
+		void winchRetract();
+		void winchPayout();
+		void winchStop();
+		void qrStart();
+		void qrStop();
+		bool qrPassingSwitchPressed();
+		bool qrFiringSwitchPressed();
+		bool cataLimitSwitchPressed();
 		
 		
 	private:
@@ -18,9 +24,5 @@ class Catapult: public Subsystem {
 		DigitalInput* qrPassingLimitSwitch;
 		DigitalInput* cataLimitSwitch;
 		
-		void winchReset ();
-		void cableSet ();
-		void qrOpen ();
-		void qrClose ();
 };
 #endif

@@ -68,11 +68,15 @@
 #define RELEASE_RELOAD 0.2
 
 #define WINCH_MOTOR_PWM 7
-#define WINCH_SPEED -0.5
+#define WINCH_RETRACT_SPEED -0.5
  
 #define QR_FIRING_LIMIT_SWITCH 9
 #define QR_PASSING_LIMIT_SWITCH 10
 #define CATA_LIMIT_SWITCH 11
+
+#define QR_OPEN_TIMEOUT 1.0
+#define QR_CLOSE_TIMEOUT 1.0
+#define WINCH_TIMEOUT 1.0
 
 #define KP 0.0
 #define KI 4.0e-4

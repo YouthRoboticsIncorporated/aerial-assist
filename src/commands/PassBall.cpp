@@ -1,25 +1,13 @@
-#include "../subsystems/Catapult.h"
-#include "../Robotmap.h"
 #include "PassBall.h"
+#include "WinchPayout.h"
+#include "WinchRetract.h"
+#include "QuickReleaseClose.h"
+#include "QuickReleaseOpen.h"
 
 
-PassBall::PassBall():CommandBase("PassBall"){
-	Requires(catapult);
+PassBall::PassBall(){
+	AddSequential(new QuickReleaseOpen());
+	AddSequential(new WinchPayout());
+	AddSequential(new QuickReleaseClose());
+	AddSequential(new WinchRetract());
 }
-
-void PassBall::Initialize(){	
-}
-
-void PassBall::Execute(){
-	catapult->passBall();
-}
-
-bool PassBall::IsFinished(){
-	return false;
-}
-
-void PassBall::End(){
-}
-
-void PassBall::Interrupted(){
-}	
