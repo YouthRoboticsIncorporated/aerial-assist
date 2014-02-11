@@ -3,7 +3,7 @@
 
 #include "../CommandBase.h"
 #include <WPILib.h>
-#include "../net/tcpconnector.h"
+
 
 class CatchBall: public CommandBase{
     public:
