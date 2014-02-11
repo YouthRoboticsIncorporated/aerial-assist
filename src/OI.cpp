@@ -6,6 +6,7 @@
 #include "commands/ThrowBall.h"
 #include "commands/ChopsticksMoveUp.h"
 #include "commands/ChopsticksMoveDown.h"
+#include "commands/RetractCatapult.h"
 
 OI::OI() {
 	// Process operator interface input here.
@@ -26,6 +27,9 @@ OI::OI() {
 	chopsticksMoveUpButton->WhenPressed(new ChopsticksMoveUp());
 	chopsticksMoveDownButton = new JoystickButton(joyDrv, CHOPSTICKS_MOVE_DOWN_BUTTON);
 	chopsticksMoveDownButton->WhenPressed(new ChopsticksMoveDown());
+	
+	retractButton = new JoystickButton(joyDrv, RETRACT_BUTTON);
+	retractButton->WhenPressed(new RetractCatapult());
 }
 
 Joystick* OI::getJoyDrv() {

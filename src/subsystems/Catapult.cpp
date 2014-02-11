@@ -38,13 +38,13 @@ void Catapult::qrStop() {
 }
 
 bool Catapult::qrFiringSwitchPressed() {
-	return qrFiringLimitSwitch->Get()==1;
+	return qrFiringLimitSwitch->Get()==0;
 }
 
 bool Catapult::qrPassingSwitchPressed() {
-	return qrPassingLimitSwitch->Get()==1;
+	return qrPassingLimitSwitch->Get()==0;
 }
 
 bool Catapult::cataLimitSwitchPressed() {
-	return cataLimitSwitch->Get()==1;
+	return cataLimitSwitch->Get()==0;
 }

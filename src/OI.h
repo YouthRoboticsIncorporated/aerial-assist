@@ -12,6 +12,7 @@ private:
 	Button* chopsticksMoveUpButton;
 	Button* chopsticksMoveDownButton;
 	Button* throwButton;
+	Button* retractButton;
 	double applyDeadZone(double,double);
 
 public:
