@@ -36,9 +36,10 @@ Chassis::Chassis():Subsystem("Chassis"),gyro(new Gyro(GYRO_PORT)){
     pidC->Enable();
     pidD->Enable();
     
-    //we are waiting for the gyro to stabilize
-    
     gyro->SetSensitivity(-Gyro::kDefaultVoltsPerDegreePerSecond);
+    
+    // Add to Live Window
+    liveWindow();
 }
 
 Chassis::~Chassis() {
@@ -117,3 +118,11 @@ void Chassis::InitDefaultCommand() {
     SetDefaultCommand(new MeccanumDrive());
 }
     
+void Chassis::liveWindow() {
+	// Add all off the components to the Live Window for testing
+	LiveWindow* lw = LiveWindow::GetInstance();
+	lw->AddActuator("Chassis", "Motor A", driveMotorA);
+	lw->AddActuator("Chassis", "Motor B", driveMotorB);
+	lw->AddActuator("Chassis", "Motor C", driveMotorC);
+	lw->AddActuator("Chassis", "Motor D", driveMotorD);
+}

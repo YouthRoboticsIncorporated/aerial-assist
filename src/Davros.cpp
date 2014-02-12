@@ -12,10 +12,7 @@ Davros::Davros()
 void Davros::RobotInit() {
     CommandBase::init();
     autonomousCommand = NULL;
-    lw = LiveWindow::GetInstance();
-    
-    SmartDashboard::PutData(Scheduler::GetInstance());
-    SmartDashboard::PutData(CommandBase::chassis);
+    lw = LiveWindow::GetInstance();    
 }
 
 void Davros::AutonomousInit() {
@@ -39,12 +36,33 @@ void Davros::TeleopInit() {
 
 void Davros::TeleopPeriodic() {
     Scheduler::GetInstance()->Run();
-	SmartDashboard::PutData("Chopsticks", CommandBase::chopsticks);
+    smartDashboard(); // Update SDB values
+    
+}
+
+void Davros::TestInit() {
 }
 
 void Davros::TestPeriodic() {
     lw->Run();
 }
+
+void Davros::smartDashboard() {
+	// Update the Smart Dashboard values
+	// Call from TeleopPeriodic and AutonomousPeriodic
+    SmartDashboard::PutData(Scheduler::GetInstance());
+    
+    SmartDashboard::PutData(CommandBase::chassis);
+	SmartDashboard::PutData(CommandBase::chopsticks);
+	SmartDashboard::PutData(CommandBase::catapult);
+	
+	SmartDashboard::PutBoolean("QR Fire Limit",
+		CommandBase::catapult->qrFiringSwitchPressed());
+	SmartDashboard::PutBoolean("QR Pass Limit",
+		CommandBase::catapult->qrPassingSwitchPressed());
+	SmartDashboard::PutBoolean("Catapult Arm Limit",
+		CommandBase::catapult->cataLimitSwitchPressed());
+}	
 
 START_ROBOT_CLASS(Davros);
 

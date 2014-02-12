@@ -15,14 +15,14 @@ class Catapult: public Subsystem {
 		bool qrPassingSwitchPressed();
 		bool qrFiringSwitchPressed();
 		bool cataLimitSwitchPressed();
-		
-		
+			
 	private:
 		Victor* releaseMotor;
 		Victor* winchMotor;
 		DigitalInput* qrFiringLimitSwitch;
 		DigitalInput* qrPassingLimitSwitch;
 		DigitalInput* cataLimitSwitch;
+		void liveWindow();
 		
 };
 #endif

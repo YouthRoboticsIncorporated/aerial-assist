@@ -7,6 +7,9 @@ Catapult::Catapult():Subsystem("Catapult"){
 	qrFiringLimitSwitch = new DigitalInput (QR_FIRING_LIMIT_SWITCH);
 	qrPassingLimitSwitch = new DigitalInput (QR_PASSING_LIMIT_SWITCH);
 	cataLimitSwitch = new DigitalInput (CATA_LIMIT_SWITCH);
+	
+	// Add to Live Window
+	liveWindow();
 }
 
 Catapult::~Catapult() {
@@ -47,4 +50,11 @@ bool Catapult::qrPassingSwitchPressed() {
 
 bool Catapult::cataLimitSwitchPressed() {
 	return cataLimitSwitch->Get()==0;
+}
+
+void Catapult::liveWindow() {
+	// Add all off the components to the Live Window for testing
+	LiveWindow* lw = LiveWindow::GetInstance();
+	lw->AddActuator("Catapult", "Release Motor", releaseMotor);
+	lw->AddActuator("Catapult", "Winch Motor", winchMotor);
 }

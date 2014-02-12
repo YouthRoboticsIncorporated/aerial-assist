@@ -7,6 +7,7 @@ class Davros : public IterativeRobot {
     private:
         Command *autonomousCommand;
         LiveWindow *lw;
+        void smartDashboard();
         
         
     public:
@@ -16,6 +17,7 @@ class Davros : public IterativeRobot {
         void AutonomousPeriodic();
         void TeleopInit();
         void TeleopPeriodic();
+        void TestInit();
         void TestPeriodic();
 };
 
