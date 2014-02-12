@@ -2,9 +2,8 @@
 #include "../Robotmap.h"
 #include "QuickReleaseOpen.h"
 
-QuickReleaseOpen::QuickReleaseOpen():CommandBase("QuickReleaseOpen"){
+QuickReleaseOpen::QuickReleaseOpen():CommandBase("QuickReleaseOpen", QR_OPEN_TIMEOUT){
 	Requires(catapult);
-	SetTimeout(QR_OPEN_TIMEOUT);
 }
 
 void QuickReleaseOpen::Initialize(){

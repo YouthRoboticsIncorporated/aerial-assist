@@ -2,9 +2,8 @@
 #include "../Robotmap.h"
 #include "QuickReleaseClose.h"
 
-QuickReleaseClose::QuickReleaseClose():CommandBase("QuickReleaseClose"){
+QuickReleaseClose::QuickReleaseClose():CommandBase("QuickReleaseClose", QR_CLOSE_TIMEOUT) {
 	Requires(catapult);
-	SetTimeout(QR_CLOSE_TIMEOUT);
 }
 
 void QuickReleaseClose::Initialize(){

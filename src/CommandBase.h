@@ -15,6 +15,7 @@
 class CommandBase: public Command {
 public:
 	CommandBase(const char *name);
+	CommandBase(const char *name, double);
 	CommandBase();
 	static void init();
 	// Create a single static instance of all of your subsystems

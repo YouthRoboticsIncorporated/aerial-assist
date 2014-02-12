@@ -2,9 +2,8 @@
 #include "../Robotmap.h"
 #include "WinchRetract.h"
 
-WinchRetract::WinchRetract():CommandBase("WinchRetract"){
+WinchRetract::WinchRetract():CommandBase("WinchRetract", WINCH_TIMEOUT){
 	Requires(catapult);
-	SetTimeout(WINCH_TIMEOUT);
 }
 
 void WinchRetract::Initialize(){

@@ -2,9 +2,8 @@
 #include "../Robotmap.h"
 #include "WinchPayout.h"
 
-WinchPayout::WinchPayout():CommandBase("WinchPayout"){
+WinchPayout::WinchPayout():CommandBase("WinchPayout", WINCH_TIMEOUT){
 	Requires(catapult);
-	SetTimeout(WINCH_TIMEOUT);
 }
 
 void WinchPayout::Initialize(){
