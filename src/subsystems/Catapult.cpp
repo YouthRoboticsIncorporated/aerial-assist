@@ -33,7 +33,7 @@ void Catapult::winchStop() {
 }
 
 void Catapult::qrStart() {
-	releaseMotor->Set(-1.0);
+	releaseMotor->Set(1.0);
 }
 
 void Catapult::qrStop() {
