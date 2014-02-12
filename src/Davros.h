@@ -9,7 +9,6 @@ class Davros : public IterativeRobot {
         LiveWindow *lw;
         void smartDashboard();
         
-        
     public:
 		Davros();
         void RobotInit();

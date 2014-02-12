@@ -125,4 +125,9 @@ void Chassis::liveWindow() {
 	lw->AddActuator("Chassis", "Motor B", driveMotorB);
 	lw->AddActuator("Chassis", "Motor C", driveMotorC);
 	lw->AddActuator("Chassis", "Motor D", driveMotorD);
+	lw->AddSensor("Chassis", "Gyro(deg)", gyro);
+	lw->AddSensor("Chassis", "EncoderA",  encoderA);
+	lw->AddSensor("Chassis", "EncoderB",  encoderB);
+	lw->AddSensor("Chassis", "EncoderC",  encoderC);
+	lw->AddSensor("Chassis", "EncoderD",  encoderD);
 }
