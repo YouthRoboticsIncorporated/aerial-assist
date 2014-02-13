@@ -27,7 +27,6 @@ add_sources(Davros.cpp
 )
 add_subdirectory(commands)
 add_subdirectory(subsystems)
-add_subdirectory(net)
 
 add_executable(Davros ${SOURCE_CODE})
 target_link_libraries(Davros ${WPILib_LIBRARY})
