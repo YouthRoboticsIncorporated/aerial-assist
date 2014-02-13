@@ -2,10 +2,16 @@
 #include "../Robotmap.h"
 #include "../commands/RunTracking.h"
 
-#include <cstdlib>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <unistd.h>
+#include <cstring>
+
 
 Beaglebone::Beaglebone():Subsystem ("Beaglebone"){
-    connector = new TCPConnector();
     ballX = 99.0;
     ballY = 99.0;
     ballDiam = 99.0;
@@ -13,87 +19,104 @@ Beaglebone::Beaglebone():Subsystem ("Beaglebone"){
     goalY = 99.0;
     goalAngle = 99.0;
     isConnected = false;
+    isBound = false;
     isTrackingBall = true;
+    
+    // Initialise the connection parameters
+    // This section opens a UDP connection to the beagle bone
+    memset(&address_bbb, 0, sizeof(address_bbb));
+    address_bbb.sin_family = AF_INET;
+    address_bbb.sin_port = htons(BEAGLEBONE_PORT);
+    inet_aton(const_cast<char *>(BEAGLEBONE_IP), &address_bbb.sin_addr);
+    sd_bbb = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP); // To send to BBB
+
+    // This section creates a listening UDP connection on the cRIO
+    memset(&address_crio, 0, sizeof(address_crio));
+    address_crio.sin_family = AF_INET;
+    address_crio.sin_port = htons(BEAGLEBONE_PORT);
+    address_crio.sin_addr.s_addr = htonl(INADDR_ANY);
+    sd_crio = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP); // To send receive on cRIO
+    struct timeval tv;
+	tv.tv_sec = 0;
+	tv.tv_usec = 10000; // Timeout for connection
+	setsockopt(sd_crio, SOL_SOCKET, SO_RCVTIMEO, (char *)&tv,sizeof(struct timeval));
+    
+    // Try to bind the port
+    bindPort();
 }
 
 Beaglebone::~Beaglebone() {
-	delete connector;
+    close(sd_crio);
+    close(sd_bbb);
 }
 
 void Beaglebone::readData() {
-	if (isTrackingBall){
-		findBall();
-	}
-	else{
-		findGoal();
-	}
-}
-
-void Beaglebone::connect() {
-	//this section opens a TCP connection to the beagle bone
-	stream = connector->connect(BALL_VISION_IP,BALL_VISION_PORT);	
-}
-
-void Beaglebone::findGoal() {
-	connect();
-	if(stream){
-		isConnected = true;
-		
-		char line[256];
-		char* lastChar = NULL;
-		
-		
-		stream->send("g", 1);
-		
-		stream->receive(line, sizeof(line));
-		//this code gets the data from the beagle bone and converts into the following 
-		// values so that the robot tracks and follows the ball
-		double x = strtod(line, &lastChar);
-		double y = strtod(lastChar, &lastChar);
-		double angle = strtod(lastChar, NULL);
-		goalX = x;
-		goalY = y;
-		goalAngle = angle;
-		
-		delete stream;
-	}
-	else{
-		 isConnected = false;
-	 }
-}
-
-
-void Beaglebone::findBall() {
-	connect();
-	if(stream){
-		isConnected = true;
-		
-		char line[256];
-		char* lastChar = NULL;
-		
-		DriverStation::Alliance colour;
+    if (!isBound) {
+        // Try to connect again
+        bindPort();
+        return;
+    }
+    // Send a UDP blast to the BBB to make sure it is in the correct mode
+    char targetCode = 'g';
+    if (isTrackingBall) {
+        DriverStation::Alliance colour;
 	    colour = DriverStation::GetInstance()->GetAlliance();
 	    if (colour == DriverStation::Alliance::kBlue){
-		    stream->send("b", 1);
+		    targetCode = 'b';
 		}
 		else{
-			stream->send("r", 1);
+			targetCode = 'r';
 		}
-		stream->receive(line, sizeof(line));
-		//this code gets the data from the beagle bone and converts into the following 
-		// values so that the robot tracks and follows the ball
-		double x = strtod(line, &lastChar);
-		double y = strtod(lastChar, &lastChar);
-		double diam = strtod(lastChar, NULL);
-		ballX = x;
-		ballY = y;
-		ballDiam = diam;
-		
-		delete stream;
+    }
+    sendto(sd_bbb, &targetCode, 1, 0, (struct sockaddr*)&address_bbb, sizeof(address_bbb));
+    
+    // Create a buffer to receive info into
+    char line[256];
+    char* lastChar = NULL;
+    
+    
+    // Receive a UDP packet
+    int numRead = recvfrom(sd_crio, line, sizeof(line), 0, NULL, NULL);
+    
+    // Process the packet
+    if (numRead > 0) {
+        char target = line[0]; // First character tells us if it's goal or ball
+        lastChar = &line[1]; // Process numbers from the second character
+		double a = strtod(lastChar, &lastChar);
+		double b = strtod(lastChar, &lastChar);
+		double c = strtod(lastChar, NULL);
+        // Store these in the appropriate member variables
+        if (target == 'g') {
+            goalX = a;
+            goalY = b;
+            goalAngle = c;
+            // Reset the other variables
+            ballX = 99.0;
+            ballY = 99.0;
+            ballDiam = 99.0;
+        } else {
+            ballX = a;
+            ballY = b;
+            ballDiam = c;
+            goalX = 99.0;
+            goalY = 99.0;
+            goalAngle = 99.0;
+            isConnected = true;
+            missedPackets=0;
+        }
+    } else {
+		// We must have timed out
+		missedPackets++;
 	}
-	else{
-		 isConnected = false;
-	 }
+	if (missedPackets > 100) {
+		isConnected = false;
+	}
+}
+
+bool Beaglebone::bindPort() {
+    isBound = (bind(sd_crio, (struct sockaddr*)&address_crio,
+		sizeof(address_crio)) == -1);
+    return isBound;
 }
 
 void Beaglebone::InitDefaultCommand() {
