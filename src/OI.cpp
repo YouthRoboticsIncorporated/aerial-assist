@@ -24,9 +24,9 @@ OI::OI() {
 	chopsticksSpinDownButton->WhileHeld(new ChopsticksPutDown());
 	
 	chopsticksMoveUpButton = new JoystickButton(joyDrv,CHOPSTICKS_MOVE_UP_BUTTON);
-	chopsticksMoveUpButton->WhenPressed(new ChopsticksMoveUp());
+	chopsticksMoveUpButton->WhileHeld(new ChopsticksMoveUp());
 	chopsticksMoveDownButton = new JoystickButton(joyDrv, CHOPSTICKS_MOVE_DOWN_BUTTON);
-	chopsticksMoveDownButton->WhenPressed(new ChopsticksMoveDown());
+	chopsticksMoveDownButton->WhileHeld(new ChopsticksMoveDown());
 	
 	retractButton = new JoystickButton(joyDrv, RETRACT_BUTTON);
 	retractButton->WhenPressed(new RetractCatapult());
