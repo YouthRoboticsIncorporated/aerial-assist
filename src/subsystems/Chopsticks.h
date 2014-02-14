@@ -8,11 +8,9 @@ class Chopsticks: public Subsystem {
 		Chopsticks();
 		~Chopsticks();
 		void spinChopsticks(double speed);
-		void moveChopsticks(double speed);
 		
 	private:
 		Victor* chopsticksmotor;
-		Victor* verticalmotor;
 };
 
 #endif

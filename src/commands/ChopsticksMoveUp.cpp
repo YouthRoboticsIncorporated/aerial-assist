@@ -2,14 +2,14 @@
 #include "../Robotmap.h"
 
 ChopsticksMoveUp::ChopsticksMoveUp():CommandBase("ChopsticksMoveUp"){
-	Requires(chopsticks);
+	Requires(forklift);
 }
 
 void ChopsticksMoveUp::Initialize(){	
 }
 
 void ChopsticksMoveUp::Execute(){
-	chopsticks->moveChopsticks(CHOPSTICKS_MOVE_SPEED);
+	forklift->moveForklift(CHOPSTICKS_MOVE_UP_SPEED);
 }
 
 bool ChopsticksMoveUp::IsFinished(){
@@ -20,5 +20,5 @@ void ChopsticksMoveUp::End(){
 }
 
 void ChopsticksMoveUp::Interrupted(){
-	chopsticks->moveChopsticks (0.0);
+	forklift->moveForklift (0.0);
 }	

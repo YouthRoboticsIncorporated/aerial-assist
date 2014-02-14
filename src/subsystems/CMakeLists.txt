@@ -3,4 +3,5 @@ add_sources(
 	Chopsticks.cpp
 	Catapult.cpp
 	Beaglebone.cpp
+	Forklift.cpp
 )
