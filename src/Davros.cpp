@@ -55,6 +55,7 @@ void Davros::smartDashboard() {
     SmartDashboard::PutData(CommandBase::chassis);
 	SmartDashboard::PutData(CommandBase::chopsticks);
 	SmartDashboard::PutData(CommandBase::catapult);
+	SmartDashboard::PutData(CommandBase::forklift);
 	
 	SmartDashboard::PutBoolean("QR Fire Limit",
 		CommandBase::catapult->qrFiringSwitchPressed());
@@ -62,6 +63,8 @@ void Davros::smartDashboard() {
 		CommandBase::catapult->qrPassingSwitchPressed());
 	SmartDashboard::PutBoolean("Catapult Arm Limit",
 		CommandBase::catapult->cataLimitSwitchPressed());
+	SmartDashboard::PutNumber("Ball Range", 
+		CommandBase::beaglebone->ballRange());
 }	
 
 

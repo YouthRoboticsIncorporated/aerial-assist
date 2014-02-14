@@ -12,6 +12,7 @@ class Beaglebone: public Subsystem{
 		bool isConnected;
 		bool isTrackingBall;
 		void InitDefaultCommand();
+		double ballRange();
 						
 	private:
 		bool bindPort();
@@ -20,6 +21,7 @@ class Beaglebone: public Subsystem{
 	    struct sockaddr_in address_bbb; // BBB address
 	    bool isBound; // Whether we managed to bind with the BBB
 	    unsigned int missedPackets;
+	    AnalogChannel* ultrasonic;
 };
 
 

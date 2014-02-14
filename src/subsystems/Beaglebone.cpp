@@ -12,6 +12,10 @@
 
 
 Beaglebone::Beaglebone():Subsystem ("Beaglebone"){
+    ultrasonic = new AnalogChannel(BALL_ULTRASONIC_MODULE, BALL_ULTRASONIC);
+    ultrasonic->SetAverageBits(4096);
+    ultrasonic->SetOversampleBits(4096);
+    
     ballX = 99.0;
     ballY = 99.0;
     ballDiam = 99.0;
@@ -56,6 +60,7 @@ void Beaglebone::readData() {
         bindPort();
         return;
     }
+    isTrackingBall = ultrasonic->GetAverageVoltage()<BALL_ULTRASONIC_THRESHOLD;
     // Send a UDP blast to the BBB to make sure it is in the correct mode
     char targetCode = 'g';
     if (isTrackingBall) {
@@ -121,5 +126,9 @@ bool Beaglebone::bindPort() {
 
 void Beaglebone::InitDefaultCommand() {
     SetDefaultCommand(new RunTracking());
+}
+
+double Beaglebone::ballRange() {
+	return ultrasonic->GetAverageVoltage();
 }
 
