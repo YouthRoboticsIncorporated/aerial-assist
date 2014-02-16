@@ -26,7 +26,7 @@ Chassis::Chassis():Subsystem("Chassis"),gyro(new Gyro(GYRO_PORT)){
     encoderC->Start();
     encoderD->Start();
 	
-    pidA = new PIDController(KP, KI, KD, KFF, encoderA, driveMotorA);
+    /*pidA = new PIDController(KP, KI, KD, KFF, encoderA, driveMotorA);
     pidB = new PIDController(KP, KI, KD, KFF, encoderB, driveMotorB);
     pidC = new PIDController(KP, KI, KD, KFF, encoderC, driveMotorC);
     pidD = new PIDController(KP, KI, KD, KFF, encoderD, driveMotorD);
@@ -35,7 +35,7 @@ Chassis::Chassis():Subsystem("Chassis"),gyro(new Gyro(GYRO_PORT)){
     pidB->Enable();
     pidC->Enable();
     pidD->Enable();
-    
+    */
     gyro->SetSensitivity(-Gyro::kDefaultVoltsPerDegreePerSecond);
     
     // Add to Live Window
@@ -84,13 +84,15 @@ void Chassis::drive(double vX, double vY, double vZ, double throttle, bool weBeP
 		}
 	}
 	for (int i = 0; i < 4; ++i){
-		vMotor[i] = vMotor[i]/vmax*throttle*VMAX; //This is the set point in counts/sec
+		//vMotor[i] = vMotor[i]/vmax*throttle*VMAX; //This is the set point in counts/sec
+		vMotor[i] = vMotor[i]/vmax*throttle; //This is the set point in counts/sec
 	}
 
-	pidA-> SetSetpoint(vMotor[0]);
+	/*pidA-> SetSetpoint(vMotor[0]);
 	pidB-> SetSetpoint(vMotor[1]);
 	pidC-> SetSetpoint(vMotor[2]);
 	pidD-> SetSetpoint(vMotor[3]);
+	*/
 	
 	driveMotorA->Set(vMotor[0]);
     driveMotorB->Set(vMotor[1]);
