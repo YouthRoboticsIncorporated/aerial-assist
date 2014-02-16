@@ -15,7 +15,9 @@ void QuickReleaseClose::Execute(){
 }
 
 bool QuickReleaseClose::IsFinished(){
-	return IsTimedOut() || catapult->qrFiringSwitchPressed();
+	return TimeSinceInitialized() > QR_CLOSE_MIN_TIME && 
+		(IsTimedOut() || catapult->qrFiringSwitchPressed()) 
+		&& !catapult->qrPassingSwitchPressed();
 }
 
 void QuickReleaseClose::End(){
