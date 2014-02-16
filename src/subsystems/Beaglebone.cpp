@@ -13,8 +13,8 @@
 
 Beaglebone::Beaglebone():Subsystem ("Beaglebone"){
     ultrasonic = new AnalogChannel(BALL_ULTRASONIC_MODULE, BALL_ULTRASONIC);
-    ultrasonic->SetAverageBits(4096);
-    ultrasonic->SetOversampleBits(4096);
+    ultrasonic->SetAverageBits(32);
+    ultrasonic->SetOversampleBits(32);
     
     ballX = 99.0;
     ballY = 99.0;
