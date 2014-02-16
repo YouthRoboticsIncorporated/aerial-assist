@@ -7,7 +7,18 @@ Catapult::Catapult():Subsystem("Catapult"){
 	qrFiringLimitSwitch = new DigitalInput (QR_FIRING_LIMIT_SWITCH);
 	qrPassingLimitSwitch = new DigitalInput (QR_PASSING_LIMIT_SWITCH);
 	cataLimitSwitch = new DigitalInput (CATA_LIMIT_SWITCH);
-	
+#ifndef IR_DEBUG
+	lineCounterTrigger = new AnalogTrigger (LINE_COUNTER_TRIGGER);
+	lineCounterTrigger->SetLimitsVoltage(LINE_SENSOR_MINIMUM_THRESHHOLD, 
+		LINE_SENSOR_MAXIMUM_THRESHHOLD);
+	//lineCounterTrigger->SetAveraged(false);
+	lineCounterTrigger->SetFiltered(true);
+	winchCounter = new Counter (lineCounterTrigger);
+	winchCounter->SetUpDownCounterMode();
+	winchCounter->Start();
+#else
+	irSensor = new AnalogChannel(LINE_COUNTER_TRIGGER);
+#endif	
 	// Add to Live Window
 	liveWindow();
 }

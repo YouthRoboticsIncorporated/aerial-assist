@@ -65,6 +65,15 @@ void Davros::smartDashboard() {
 		CommandBase::catapult->cataLimitSwitchPressed());
 	SmartDashboard::PutNumber("Ball Range", 
 		CommandBase::beaglebone->ballRange());
+#ifndef IR_DEBUG
+	SmartDashboard::PutNumber("Winch Counter",
+		CommandBase::catapult->winchCounter->Get());
+	SmartDashboard::PutBoolean("Winch Trigger",
+		CommandBase::catapult->lineCounterTrigger->GetTriggerState());
+#else
+	SmartDashboard::PutNumber("IR Voltage", 
+		CommandBase::catapult->irSensor->GetAverageVoltage());
+#endif
 }	
 
 

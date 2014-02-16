@@ -7,6 +7,9 @@
 #include "commands/ChopsticksMoveUp.h"
 #include "commands/ChopsticksMoveDown.h"
 #include "commands/RetractCatapult.h"
+#include "commands/WinchPayout.h"
+#include "commands/WinchRetract.h"
+
 
 OI::OI() {
 	// Process operator interface input here.
@@ -29,7 +32,10 @@ OI::OI() {
 	chopsticksMoveDownButton->WhileHeld(new ChopsticksMoveDown());
 	
 	retractButton = new JoystickButton(joyDrv, RETRACT_BUTTON);
-	retractButton->WhenPressed(new RetractCatapult());
+	retractButton->WhileHeld(new WinchRetract());
+	payoutButton = new JoystickButton(joyDrv, PAYOUT_BUTTON);
+	payoutButton->WhileHeld(new WinchPayout());
+
 }
 
 Joystick* OI::getJoyDrv() {

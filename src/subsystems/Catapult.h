@@ -2,6 +2,7 @@
 #define Catapult_h
 
 #include <WPILib.h>
+#include "../Robotmap.h"
 
 class Catapult: public Subsystem {
 	public:
@@ -15,7 +16,13 @@ class Catapult: public Subsystem {
 		bool qrPassingSwitchPressed();
 		bool qrFiringSwitchPressed();
 		bool cataLimitSwitchPressed();
-			
+#ifndef IR_DEBUG
+		Counter* winchCounter;
+		AnalogTrigger* lineCounterTrigger;
+#else
+		AnalogChannel* irSensor;
+#endif
+					
 	private:
 		Victor* releaseMotor;
 		Victor* winchMotor;
@@ -23,6 +30,6 @@ class Catapult: public Subsystem {
 		DigitalInput* qrPassingLimitSwitch;
 		DigitalInput* cataLimitSwitch;
 		void liveWindow();
-		
+
 };
 #endif

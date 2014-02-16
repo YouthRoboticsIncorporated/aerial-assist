@@ -2,11 +2,12 @@
 #include "../Robotmap.h"
 #include "WinchRetract.h"
 
-WinchRetract::WinchRetract():CommandBase("WinchRetract", WINCH_TIMEOUT){
+WinchRetract::WinchRetract():CommandBase("WinchRetract"){
 	Requires(catapult);
 }
 
 void WinchRetract::Initialize(){
+	SetTimeout(WINCH_RETRACT_TIMEOUT);
 	catapult-> winchRetract();
 }
 
@@ -14,11 +15,11 @@ void WinchRetract::Execute(){
 }
 
 bool WinchRetract::IsFinished(){
-	return IsTimedOut()||catapult->cataLimitSwitchPressed();
+	return IsTimedOut() || catapult->cataLimitSwitchPressed();
 }
 
 void WinchRetract::End(){
-	catapult->qrStop();
+	catapult->winchStop();
 }
 
 void WinchRetract::Interrupted(){

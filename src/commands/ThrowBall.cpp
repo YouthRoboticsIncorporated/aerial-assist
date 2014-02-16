@@ -4,7 +4,7 @@
 #include "QuickReleaseClose.h"
 #include "QuickReleaseOpen.h"
 
-ThrowBall::ThrowBall(){
+ThrowBall::ThrowBall(): CommandGroup("ThrowBall"){
 	AddSequential(new WinchPayout());
 	AddSequential(new QuickReleaseOpen());
 	AddSequential(new QuickReleaseClose());
