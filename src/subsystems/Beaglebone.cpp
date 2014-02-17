@@ -60,7 +60,7 @@ void Beaglebone::readData() {
         bindPort();
         return;
     }
-    isTrackingBall = ultrasonic->GetAverageVoltage()<BALL_ULTRASONIC_THRESHOLD;
+    isTrackingBall = ultrasonic->GetAverageVoltage()  >BALL_ULTRASONIC_THRESHOLD;
     // Send a UDP blast to the BBB to make sure it is in the correct mode
     char targetCode = 'g';
     if (isTrackingBall) {
