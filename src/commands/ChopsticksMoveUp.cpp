@@ -3,9 +3,11 @@
 
 ChopsticksMoveUp::ChopsticksMoveUp():CommandBase("ChopsticksMoveUp"){
 	Requires(forklift);
+	Requires(chopsticks);
 }
 
-void ChopsticksMoveUp::Initialize(){	
+void ChopsticksMoveUp::Initialize(){
+	chopsticks->spinChopsticks(CHOPSTICKS_ROTATE_SPEED);	
 }
 
 void ChopsticksMoveUp::Execute(){

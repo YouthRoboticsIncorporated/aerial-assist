@@ -14,6 +14,8 @@ add_sources(
   RetractCatapult.cpp
   RunTracking.cpp
   WinchOpen.cpp
-  AutonomousCommandGroup.cpp
   DriveForward.cpp
+  FindPosition.cpp
+  AutonomousCommandGroup.cpp
+  ChopsticksStop.cpp
 )

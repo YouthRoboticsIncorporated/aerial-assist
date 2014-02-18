@@ -7,8 +7,7 @@ class OI {
 private:
 	Joystick* joyDrv;
 	Button* catchButton;
-	Button* chopsticksSpinUpButton;
-	Button* chopsticksSpinDownButton;
+	Button* chopsticksStopButton;
 	Button* chopsticksMoveUpButton;
 	Button* chopsticksMoveDownButton;
 	Button* throwButton;
@@ -17,6 +16,8 @@ private:
 	double applyDeadZone(double,double);
 	Button* winchOpenButton;
 	Button* qrCloseButton;
+	Button* passButton;
+	
 
 public:
 	OI();

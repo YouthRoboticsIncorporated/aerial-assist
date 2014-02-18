@@ -1,9 +1,9 @@
 #include "OI.h"
 #include "Robotmap.h"
 #include "commands/CatchBall.h"
-#include "commands/ChopsticksPickUp.h"
-#include "commands/ChopsticksPutDown.h"
+#include "commands/ChopsticksStop.h"
 #include "commands/ThrowBall.h"
+#include "commands/PassBall.h"
 #include "commands/ChopsticksMoveUp.h"
 #include "commands/ChopsticksMoveDown.h"
 #include "commands/RetractCatapult.h"
@@ -23,10 +23,11 @@ OI::OI() {
 	throwButton = new JoystickButton(joyDrv,THROW_BUTTON);
 	throwButton->WhenPressed(new ThrowBall());
 	
-	chopsticksSpinUpButton = new JoystickButton(joyDrv,CHOPSTICKS_SPIN_UP_BUTTON);
-	chopsticksSpinUpButton->WhileHeld(new ChopsticksPickUp());
-	chopsticksSpinDownButton = new JoystickButton(joyDrv,CHOPSTICKS_SPIN_DOWN_BUTTON);
-	chopsticksSpinDownButton->WhileHeld(new ChopsticksPutDown());
+	passButton = new JoystickButton(joyDrv,PASS_BUTTON);
+	passButton->WhenPressed(new PassBall());
+	
+	chopsticksStopButton = new JoystickButton(joyDrv,CHOPSTICKS_STOP_BUTTON);
+	chopsticksStopButton->WhenPressed(new ChopsticksStop());
 	
 	chopsticksMoveUpButton = new JoystickButton(joyDrv,CHOPSTICKS_MOVE_UP_BUTTON);
 	chopsticksMoveUpButton->WhileHeld(new ChopsticksMoveUp());

@@ -2,6 +2,7 @@
 
 #include "Davros.h"
 #include "Robotmap.h"
+#include "commands/AutonomousCommandGroup.h"
 
 
 Davros::Davros()
@@ -11,12 +12,12 @@ Davros::Davros()
 
 void Davros::RobotInit() {
     CommandBase::init();
-    autonomousCommand = NULL;
+    autonomousCommand = new AutonomousCommandGroup();
     lw = LiveWindow::GetInstance();    
 }
 
 void Davros::AutonomousInit() {
-    //autonomousCommand->Start();
+    autonomousCommand->Start();
     
 }
 
@@ -29,7 +30,7 @@ void Davros::TeleopInit() {
     // teleop starts running. If you want the autonomous to 
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    //autonomousCommand->Cancel();
+	autonomousCommand->Cancel();
     
 
 }
