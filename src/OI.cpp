@@ -9,6 +9,8 @@
 #include "commands/RetractCatapult.h"
 #include "commands/WinchPayout.h"
 #include "commands/WinchRetract.h"
+#include "commands/WinchOpen.h"
+#include "commands/QuickReleaseClose.h"
 
 
 OI::OI() {
@@ -35,6 +37,12 @@ OI::OI() {
 	retractButton->WhileHeld(new WinchRetract());
 	payoutButton = new JoystickButton(joyDrv, PAYOUT_BUTTON);
 	payoutButton->WhileHeld(new WinchPayout());
+	
+	winchOpenButton = new JoystickButton(joyDrv, WINCH_OPEN_BUTTON);
+	winchOpenButton->WhileHeld(new WinchOpen());
+	
+	qrCloseButton = new JoystickButton(joyDrv, QR_CLOSE_BUTTON);
+	qrCloseButton->WhileHeld(new QuickReleaseClose());
 
 }
 

@@ -15,6 +15,8 @@ private:
 	Button* retractButton;
 	Button* payoutButton;
 	double applyDeadZone(double,double);
+	Button* winchOpenButton;
+	Button* qrCloseButton;
 
 public:
 	OI();

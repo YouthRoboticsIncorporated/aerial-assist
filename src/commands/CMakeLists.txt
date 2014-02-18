@@ -13,4 +13,5 @@ add_sources(
   QuickReleaseClose.cpp
   RetractCatapult.cpp
   RunTracking.cpp
+  WinchOpen.cpp
 )
