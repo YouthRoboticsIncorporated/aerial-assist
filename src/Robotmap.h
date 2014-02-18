@@ -87,11 +87,8 @@
 
 #define LINE_COUNTER_TRIGGER 3
 
-#define KP 0.0
-#define KI 4.0e-4
-#define KD 0.0
-#define VMAX 2300.0
-#define KFF 1.0/VMAX
+#define MAX_SPIN_RATE 360.00
+#define GYRO_KP 0.05
 
 #define BALL_ULTRASONIC_THRESHOLD 0.1
 
