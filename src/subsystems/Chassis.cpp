@@ -65,7 +65,7 @@ void Chassis::drive(double vX, double vY, double vZ, double throttle, bool weBeP
 	
 	//this maps the body co-ordinates to the absolute field co-ordinates
 	if(weBePimpin){
-		double heading = gyro->GetAngle()*-1*3.14159/180.0;
+		double heading = gyro->GetAngle()*3.14159/180.0;
 		double vXpimp = vX*cos(heading)+vY*sin(heading);
 		double vYpimp = -vX*sin(heading)+vY*cos(heading);
 		vX = vXpimp;
