@@ -25,17 +25,7 @@ Chassis::Chassis():Subsystem("Chassis"),gyro(new Gyro(GYRO_PORT)){
     encoderB->Start();
     encoderC->Start();
     encoderD->Start();
-	
-    /*pidA = new PIDController(KP, KI, KD, KFF, encoderA, driveMotorA);
-    pidB = new PIDController(KP, KI, KD, KFF, encoderB, driveMotorB);
-    pidC = new PIDController(KP, KI, KD, KFF, encoderC, driveMotorC);
-    pidD = new PIDController(KP, KI, KD, KFF, encoderD, driveMotorD);
     
-    pidA->Enable();
-    pidB->Enable();
-    pidC->Enable();
-    pidD->Enable();
-    */
     gyro->SetSensitivity(-Gyro::kDefaultVoltsPerDegreePerSecond);
     
     // Add to Live Window
@@ -47,11 +37,6 @@ Chassis::~Chassis() {
 	delete driveMotorB;
 	delete driveMotorC;
 	delete driveMotorD;
-	
-	delete pidA;
-	delete pidB;
-	delete pidC;
-	delete pidD;
 	
 	delete encoderA;
 	delete encoderB;
@@ -72,6 +57,10 @@ void Chassis::drive(double vX, double vY, double vZ, double throttle, bool weBeP
 		vY = vYpimp;
 	}
 	
+    double rate = gyro->GetRate();
+    double gyroError = vZ*throttle-rate/MAX_SPIN_RATE;
+    vZ = vZ + GYRO_KP*gyroError;
+    
 	vMotor[0] = vX - vY - vZ;
 	vMotor[1] = vX + vY - vZ;
 	vMotor[2] = -vX + vY - vZ;
@@ -87,12 +76,6 @@ void Chassis::drive(double vX, double vY, double vZ, double throttle, bool weBeP
 		//vMotor[i] = vMotor[i]/vmax*throttle*VMAX; //This is the set point in counts/sec
 		vMotor[i] = vMotor[i]/vmax*throttle; //This is the set point in counts/sec
 	}
-
-	/*pidA-> SetSetpoint(vMotor[0]);
-	pidB-> SetSetpoint(vMotor[1]);
-	pidC-> SetSetpoint(vMotor[2]);
-	pidD-> SetSetpoint(vMotor[3]);
-	*/
 	
 	driveMotorA->Set(vMotor[0]);
     driveMotorB->Set(vMotor[1]);
@@ -105,6 +88,7 @@ void Chassis::drive(double vX, double vY, double vZ, double throttle, bool weBeP
     SmartDashboard::PutNumber("Motor C", vMotor[2]);
     SmartDashboard::PutNumber("Motor D", vMotor[3]);
     SmartDashboard::PutNumber("Gyro(deg)", gyro->GetAngle());
+    SmartDashboard::PutNumber("Gyro(rate)", gyro->GetRate());
     SmartDashboard::PutNumber("EncoderA(counts)", encoderA->Get());
 	SmartDashboard::PutNumber("EncoderB(counts)", encoderB->Get());
 	SmartDashboard::PutNumber("EncoderC(counts)", encoderC->Get());

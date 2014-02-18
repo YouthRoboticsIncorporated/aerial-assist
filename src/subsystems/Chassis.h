@@ -17,10 +17,6 @@ class Chassis: public Subsystem {
 		Victor* driveMotorD;
 		void liveWindow();
 
-		PIDController* pidA;
-		PIDController* pidB;
-		PIDController* pidC;
-		PIDController* pidD;
 		Encoder *encoderA, *encoderB, *encoderC, *encoderD;
 		
 		Gyro *gyro;
