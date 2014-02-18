@@ -105,5 +105,8 @@
 #define QR_CLOSE_BUTTON 10
 
 //#define IR_DEBUG 1
+
+#define MIN_FIRE_RANGE 2.0
+#define MAX_FIRE_RANGE 3.0
  
 #endif
