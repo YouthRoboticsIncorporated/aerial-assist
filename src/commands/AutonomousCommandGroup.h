@@ -8,10 +8,6 @@
 class AutonomousCommandGroup: public CommandGroup{
 	public:
 		AutonomousCommandGroup();
-		~AutonomousCommandGroup();
-		void initialize();
-		void execute();
-		void isFinished();
 };
 	
 #endif

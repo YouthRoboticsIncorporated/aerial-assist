@@ -11,7 +11,6 @@ class FindPosition: public CommandBase{
 		virtual bool IsFinished();
 		virtual void End();
 		virtual void Interrupted();
-		virtual bool IsTimedOut();
 };
 
 #endif
