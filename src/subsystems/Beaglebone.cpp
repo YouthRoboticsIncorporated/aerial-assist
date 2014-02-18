@@ -19,9 +19,9 @@ Beaglebone::Beaglebone():Subsystem ("Beaglebone"){
     ballX = 99.0;
     ballY = 99.0;
     ballDiam = 99.0;
-    goalX = 99.0;
-    goalY = 99.0;
+    goalRange = 99.0;
     goalAngle = 99.0;
+    goalHot = false;
     isConnected = false;
     isBound = false;
     isTrackingBall = true;
@@ -92,8 +92,7 @@ void Beaglebone::readData() {
 		double c = strtod(lastChar, NULL);
         // Store these in the appropriate member variables
         if (target == 'g') {
-            goalX = a;
-            goalY = b;
+            goalRange = a;
             goalAngle = c;
             // Reset the other variables
             ballX = 99.0;
@@ -103,9 +102,9 @@ void Beaglebone::readData() {
             ballX = a;
             ballY = b;
             ballDiam = c;
-            goalX = 99.0;
-            goalY = 99.0;
+            goalRange = 99.0;
             goalAngle = 99.0;
+            goalHot = false;
             isConnected = true;
             missedPackets=0;
         }

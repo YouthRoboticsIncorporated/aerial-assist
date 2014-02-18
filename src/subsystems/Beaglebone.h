@@ -8,7 +8,7 @@ class Beaglebone: public Subsystem{
 		Beaglebone();
 		~Beaglebone();
 		void readData();
-		double ballX, ballY, ballDiam, goalX, goalY, goalAngle;
+		double ballX, ballY, ballDiam, goalRange, goalAngle, goalHot;
 		bool isConnected;
 		bool isTrackingBall;
 		void InitDefaultCommand();
