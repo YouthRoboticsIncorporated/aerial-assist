@@ -18,4 +18,5 @@ add_sources(
   FindPosition.cpp
   AutonomousCommandGroup.cpp
   ChopsticksStop.cpp
+  ChopsticksDrop.cpp
 )

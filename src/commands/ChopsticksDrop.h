@@ -1,18 +1,16 @@
-#ifndef WinchRetract_h
-#define WinchRetract_h
+#ifndef ChopsticksDrop_h
+#define ChopsticksDrop_h
 
 #include "../CommandBase.h"
 
-class WinchRetract:public CommandBase{
+class ChopsticksDrop: public CommandBase{
 	public:
-		WinchRetract(bool UseLimitSwitch = true);
+		ChopsticksDrop();
 		virtual void Initialize();
 		virtual void Execute();
 		virtual bool IsFinished();
 		virtual void End();
 		virtual void Interrupted();
-	private:
-		bool UseLimitSwitch_;
 };
 
 #endif

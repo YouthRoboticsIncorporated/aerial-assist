@@ -3,7 +3,7 @@
 
 DriveForward::DriveForward():CommandBase("DriveForward"){
 	Requires(chassis);
-	SetTimeout(1.5);
+	SetTimeout(3);
 }
 
 void DriveForward::Initialize(){	
@@ -11,7 +11,7 @@ void DriveForward::Initialize(){
 }
 
 void DriveForward::Execute(){
-	chassis->drive(1, 0, 0, 0.75, true);
+	chassis->drive(1, 0, 0, 0.40, true);
     
 }
 

@@ -6,6 +6,7 @@
 class OI {
 private:
 	Joystick* joyDrv;
+	Joystick* joyOpr;
 	Button* catchButton;
 	Button* chopsticksStopButton;
 	Button* chopsticksMoveUpButton;
@@ -17,12 +18,17 @@ private:
 	Button* winchOpenButton;
 	Button* qrCloseButton;
 	Button* passButton;
+	Button* chopsticksStopButtonOpr;
+	Button* retractButtonOpr;
+	Button* payoutButtonOpr;
+	Button* chopsticksMoveUpButtonOpr;
 	
 
 public:
 	OI();
 	
 	Joystick* getJoyDrv();
+	Joystick* getJoyOpr();
 	double getJoyDrvX();
 	double getJoyDrvY();
 	double getJoyDrvZ();

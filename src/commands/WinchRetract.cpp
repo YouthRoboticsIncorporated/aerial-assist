@@ -2,8 +2,9 @@
 #include "../Robotmap.h"
 #include "WinchRetract.h"
 
-WinchRetract::WinchRetract():CommandBase("WinchRetract"){
+WinchRetract::WinchRetract(bool UseLimitSwitch):CommandBase("WinchRetract"){
 	Requires(catapult);
+	UseLimitSwitch_ = UseLimitSwitch;
 }
 
 void WinchRetract::Initialize(){
@@ -15,7 +16,7 @@ void WinchRetract::Execute(){
 }
 
 bool WinchRetract::IsFinished(){
-	return IsTimedOut() || catapult->cataLimitSwitchPressed();
+	return IsTimedOut() || (catapult->cataLimitSwitchPressed() && UseLimitSwitch_);
 }
 
 void WinchRetract::End(){

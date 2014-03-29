@@ -17,6 +17,19 @@ OI::OI() {
 	// Process operator interface input here.
 	joyDrv = new Joystick(1);
 	
+	joyOpr = new Joystick(2);
+	
+	chopsticksStopButtonOpr = new JoystickButton(joyOpr,CHOPSTICKS_STOP_BUTTON_OPR);
+	chopsticksStopButtonOpr->WhenPressed(new ChopsticksStop());
+	
+	chopsticksMoveUpButtonOpr = new JoystickButton(joyOpr,CHOPSTICKS_MOVE_UP_BUTTON_OPR);
+	chopsticksMoveUpButtonOpr->WhileHeld(new ChopsticksMoveUp());
+	
+	retractButtonOpr = new JoystickButton(joyOpr, RETRACT_BUTTON_OPR);
+	retractButtonOpr->WhileHeld(new WinchRetract(false));
+	payoutButtonOpr = new JoystickButton(joyOpr, PAYOUT_BUTTON_OPR);
+	payoutButtonOpr->WhileHeld(new WinchPayout());
+	
 	catchButton = new JoystickButton(joyDrv,CATCH_BUTTON);
 	catchButton->WhileHeld(new CatchBall());
 	
@@ -35,7 +48,7 @@ OI::OI() {
 	chopsticksMoveDownButton->WhileHeld(new ChopsticksMoveDown());
 	
 	retractButton = new JoystickButton(joyDrv, RETRACT_BUTTON);
-	retractButton->WhileHeld(new WinchRetract());
+	retractButton->WhileHeld(new WinchRetract(false));
 	payoutButton = new JoystickButton(joyDrv, PAYOUT_BUTTON);
 	payoutButton->WhileHeld(new WinchPayout());
 	
