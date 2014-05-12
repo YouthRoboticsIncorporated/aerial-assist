@@ -57,6 +57,16 @@ void Chassis::drive(double vX, double vY, double vZ, double throttle, bool weBeP
 		vY = vYpimp;
 	}
 	
+	double ax = log(JOYSTICK_X_EXPONENTIAL+1);
+	double ay = log(JOYSTICK_Y_EXPONENTIAL+1);
+	double az = log(JOYSTICK_Z_EXPONENTIAL+1);
+	
+	vX = (exp(ax*vX)-1)/JOYSTICK_X_EXPONENTIAL;
+	vY = (exp(ay*vY)-1)/JOYSTICK_Y_EXPONENTIAL;
+	vZ = (exp(az*vZ)-1)/JOYSTICK_Z_EXPONENTIAL;
+	
+	
+	
     double rate = gyro->GetRate();
     double gyroError = vZ*throttle-rate/MAX_SPIN_RATE;
     vZ = vZ + GYRO_KP*gyroError;
