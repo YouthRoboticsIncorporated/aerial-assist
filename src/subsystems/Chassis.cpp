@@ -60,10 +60,25 @@ void Chassis::drive(double vX, double vY, double vZ, double throttle, bool weBeP
 	double ax = log(JOYSTICK_X_EXPONENTIAL+1);
 	double ay = log(JOYSTICK_Y_EXPONENTIAL+1);
 	double az = log(JOYSTICK_Z_EXPONENTIAL+1);
+
 	
-	vX = (exp(ax*vX)-1)/JOYSTICK_X_EXPONENTIAL;
-	vY = (exp(ay*vY)-1)/JOYSTICK_Y_EXPONENTIAL;
-	vZ = (exp(az*vZ)-1)/JOYSTICK_Z_EXPONENTIAL;
+	if (vX > 0) {
+		vX = (exp(ax*vX)-1)/JOYSTICK_X_EXPONENTIAL;
+	} else {
+		vX = -(exp(ax*-vX)-1)/JOYSTICK_X_EXPONENTIAL; 
+		}
+		
+	if (vY > 0) {
+		vY =(exp(ay*vY)-1)/JOYSTICK_Y_EXPONENTIAL;
+	} else {
+		vY = -(exp(ay*-vY)-1)/JOYSTICK_Y_EXPONENTIAL; 
+	}
+		
+	if (vZ > 0) {
+		vZ = (exp(az*vZ)-1)/JOYSTICK_Z_EXPONENTIAL;
+	} else {
+		vZ = -(exp(az*-vZ)-1)/-JOYSTICK_Z_EXPONENTIAL; 
+	}
 	
 	
 	
