@@ -28,6 +28,8 @@ Chassis::Chassis():Subsystem("Chassis"),gyro(new Gyro(GYRO_PORT)){
     
     gyro->SetSensitivity(-Gyro::kDefaultVoltsPerDegreePerSecond);
     
+    mpu = new MPU6050_frc(MPU6050_ADDRESS_AD0_HIGH);
+    
     // Add to Live Window
     liveWindow();
 }
@@ -122,6 +124,7 @@ void Chassis::drive(double vX, double vY, double vZ, double throttle, bool weBeP
 	SmartDashboard::PutNumber("EncoderB(speed)", encoderB->GetRate());
 	SmartDashboard::PutNumber("EncoderC(speed)", encoderC->GetRate());
 	SmartDashboard::PutNumber("EncoderD(speed)", encoderD->GetRate());
+    SmartDashboard::PutNumber("MPU6050_frc(deg)", mpu->getRotationZ());
 
 }
 

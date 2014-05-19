@@ -27,8 +27,9 @@ add_sources(Davros.cpp
 )
 add_subdirectory(commands)
 add_subdirectory(subsystems)
+add_subdirectory(lib)
 
 add_executable(Davros ${SOURCE_CODE})
-target_link_libraries(Davros ${WPILib_LIBRARY})
+target_link_libraries(Davros ${WPILib_LIBRARY} lib-4774) 
 
 add_make_deploy(Davros 10.47.74.2) # where your team number is xxyy
