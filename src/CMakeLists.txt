@@ -3,7 +3,7 @@ include(FRCDeploy)
 
 project(Davros)
 find_package(WPILib)
-include_directories(${WPILib_INCLUDE_DIRS})
+include_directories(${WPILib_INCLUDE_DIRS} lib)
 
 macro (add_sources)
     file (RELATIVE_PATH _relPath "${CMAKE_SOURCE_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}")

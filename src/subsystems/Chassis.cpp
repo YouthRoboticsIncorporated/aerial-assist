@@ -28,7 +28,7 @@ Chassis::Chassis():Subsystem("Chassis"),gyro(new Gyro(GYRO_PORT)){
     
     gyro->SetSensitivity(-Gyro::kDefaultVoltsPerDegreePerSecond);
     
-    mpu = new MPU6050_frc(MPU6050_ADDRESS_AD0_HIGH);
+    mpu = new lib4774::MPU6050(MPU6050_ADDRESS_AD0_LOW); // GY-521 has MPU-6050 set to AD0 low.
     
     // Add to Live Window
     liveWindow();

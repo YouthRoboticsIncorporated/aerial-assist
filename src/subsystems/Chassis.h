@@ -2,7 +2,7 @@
 #define Chassis_h
 
 #include <WPILib.h>
-#include "../lib/MPU6050-frc.h"
+#include <MPU6050.h>
 
 class Chassis: public Subsystem {
 	public:
@@ -21,7 +21,7 @@ class Chassis: public Subsystem {
 		Encoder *encoderA, *encoderB, *encoderC, *encoderD;
 		
 		Gyro *gyro;
-        MPU6050_frc *mpu;
+        lib4774::MPU6050 *mpu;
 };
 
 #endif
