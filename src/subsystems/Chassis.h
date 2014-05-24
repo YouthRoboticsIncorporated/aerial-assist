@@ -3,6 +3,7 @@
 
 #include <WPILib.h>
 #include <MPU6050.h>
+#include "GyroCorrection.h"
 
 class Chassis: public Subsystem {
 	public:
@@ -21,7 +22,9 @@ class Chassis: public Subsystem {
 		Encoder *encoderA, *encoderB, *encoderC, *encoderD;
 		
 		Gyro *gyro;
-        lib4774::MPU6050 *mpu;
+        GyroCorrection *correction;
+        PIDController *gyro_pid;
+        //lib4774::MPU6050 *mpu;
 };
 
 #endif

@@ -27,8 +27,12 @@ Chassis::Chassis():Subsystem("Chassis"),gyro(new Gyro(GYRO_PORT)){
     encoderD->Start();
     
     gyro->SetSensitivity(-Gyro::kDefaultVoltsPerDegreePerSecond);
+    gyro->SetPIDSourceParameter(Gyro :: kAngle);
+    correction = new GyroCorrection();
+    gyro_pid = new PIDController(1,0,0,gyro,correction);
+    gyro_pid->Enable();
     
-    mpu = new lib4774::MPU6050(MPU6050_ADDRESS_AD0_LOW); // GY-521 has MPU-6050 set to AD0 low.
+    //mpu = new lib4774::MPU6050(MPU6050_ADDRESS_AD0_LOW); // GY-521 has MPU-6050 set to AD0 low.
     
     // Add to Live Window
     liveWindow();
@@ -124,7 +128,8 @@ void Chassis::drive(double vX, double vY, double vZ, double throttle, bool weBeP
 	SmartDashboard::PutNumber("EncoderB(speed)", encoderB->GetRate());
 	SmartDashboard::PutNumber("EncoderC(speed)", encoderC->GetRate());
 	SmartDashboard::PutNumber("EncoderD(speed)", encoderD->GetRate());
-    SmartDashboard::PutNumber("MPU6050_frc(deg)", mpu->getRotationZ());
+    //SmartDashboard::PutNumber("MPU6050_frc(deg)", mpu->getRotationZ());
+    SmartDashboard::PutNumber("GyroPID", correction->correction);
 
 }
 
