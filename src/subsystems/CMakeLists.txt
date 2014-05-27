@@ -5,4 +5,5 @@ add_sources(
 	Beaglebone.cpp
 	Forklift.cpp
 	GyroCorrection.cpp
+    BallTrap.cpp
 )
