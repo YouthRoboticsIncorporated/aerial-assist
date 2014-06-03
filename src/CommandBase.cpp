@@ -17,6 +17,7 @@ Catapult* CommandBase::catapult = NULL;
 OI* CommandBase::oi = NULL;
 Beaglebone* CommandBase::beaglebone = NULL;
 Forklift* CommandBase::forklift = NULL;
+BallTrap* CommandBase::balltrap = NULL;
 
 void CommandBase::init() {
     // Create a single static instance of all of your subsystems. The following
@@ -26,6 +27,7 @@ void CommandBase::init() {
 	catapult = new Catapult();
 	beaglebone = new Beaglebone();
 	forklift = new Forklift();
+    balltrap = new BallTrap();
 	
 	// Always initialise the OI after all of the subsystems
 	oi = new OI();

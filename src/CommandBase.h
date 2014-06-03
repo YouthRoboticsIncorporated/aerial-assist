@@ -7,6 +7,7 @@
 #include "subsystems/Catapult.h"
 #include "subsystems/Beaglebone.h"
 #include "subsystems/Forklift.h"
+#include "subsystems/BallTrap.h"
 
 
 /**
@@ -27,6 +28,7 @@ public:
 	static Catapult *catapult;
 	static Beaglebone* beaglebone;
 	static Forklift* forklift;
+    static BallTrap* balltrap;
 };
 
 #endif
