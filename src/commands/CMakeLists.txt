@@ -19,4 +19,5 @@ add_sources(
   AutonomousCommandGroup.cpp
   ChopsticksStop.cpp
   ChopsticksDrop.cpp
+  BallTrapClose.cpp
 )

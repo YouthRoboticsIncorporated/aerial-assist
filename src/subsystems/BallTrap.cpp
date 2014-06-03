@@ -11,7 +11,10 @@ BallTrap :: ~BallTrap() {
     delete rightballtrapmotor;
 }
 
-void BallTrap :: moveTrap(double speed) {
+void BallTrap :: moveRightTrap(double speed) {
     leftballtrapmotor->Set(speed);
-    rightballtrapmotor->Set(speed);
 } 
+
+void BallTrap :: moveLeftTrap(double speed) {
+    rightballtrapmotor->Set(speed);    
+}
