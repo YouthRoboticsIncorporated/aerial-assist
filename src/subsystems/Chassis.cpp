@@ -30,6 +30,7 @@ Chassis::Chassis():Subsystem("Chassis"),gyro(new Gyro(GYRO_PORT)){
     gyro->SetPIDSourceParameter(Gyro :: kAngle);
     correction = new GyroCorrection();
     gyro_pid = new PIDController(1,0,0,gyro,correction);
+    gyro_pid->SetOutputRange(-3.1415, 3.1415);
     gyro_pid->Enable();
     
     //mpu = new lib4774::MPU6050(MPU6050_ADDRESS_AD0_LOW); // GY-521 has MPU-6050 set to AD0 low.
