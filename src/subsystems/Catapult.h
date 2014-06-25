@@ -16,6 +16,9 @@ class Catapult: public Subsystem {
 		bool qrPassingSwitchPressed();
 		bool qrFiringSwitchPressed();
 		bool cataLimitSwitchPressed();
+        
+        Victor* winchMotor;
+        Victor* releaseMotor;
 #ifndef IR_DEBUG
 		Counter* winchCounter;
 		AnalogTrigger* lineCounterTrigger;
@@ -24,8 +27,6 @@ class Catapult: public Subsystem {
 #endif
 					
 	private:
-		Victor* releaseMotor;
-		Victor* winchMotor;
 		DigitalInput* qrFiringLimitSwitch;
 		DigitalInput* qrPassingLimitSwitch;
 		DigitalInput* cataLimitSwitch;

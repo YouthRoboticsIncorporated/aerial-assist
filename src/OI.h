@@ -22,6 +22,8 @@ private:
 	Button* retractButtonOpr;
 	Button* payoutButtonOpr;
 	Button* chopsticksMoveUpButtonOpr;
+    Button* ballTrapCloseButtonOpr;
+    Button* ballTrapOpenButtonOpr;
 	
 
 public:

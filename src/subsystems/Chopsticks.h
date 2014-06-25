@@ -10,7 +10,8 @@ class Chopsticks: public Subsystem {
 		void spinChopsticks(double speed);
 		
 	private:
-		Victor* chopsticksmotor;
+		Victor* chopsticksleftmotor;
+        Victor* chopsticksrightmotor;
 };
 
 #endif

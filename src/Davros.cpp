@@ -4,6 +4,8 @@
 #include "Robotmap.h"
 #include "commands/AutonomousCommandGroup.h"
 
+#include "commands/ChopsticksPickUp.h"
+
 
 Davros::Davros()
 {
@@ -42,6 +44,7 @@ void Davros::TeleopPeriodic() {
 }
 
 void Davros::TestInit() {
+
 }
 
 void Davros::TestPeriodic() {

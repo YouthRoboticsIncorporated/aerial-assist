@@ -13,18 +13,18 @@ Chassis::Chassis():Subsystem("Chassis"),gyro(new Gyro(GYRO_PORT)){
     
     encoderA = new SpeedEncoder(ENCODER_A_1, ENCODER_A_2, ENCODER_A_REV);
 	encoderB = new SpeedEncoder(ENCODER_B_1, ENCODER_B_2, ENCODER_B_REV); 
-	encoderC = new SpeedEncoder(ENCODER_C_1, ENCODER_C_2, ENCODER_C_REV); 
-	encoderD = new SpeedEncoder(ENCODER_D_1, ENCODER_D_2, ENCODER_D_REV);
+	//encoderC = new SpeedEncoder(ENCODER_C_1, ENCODER_C_2, ENCODER_C_REV); 
+	//encoderD = new SpeedEncoder(ENCODER_D_1, ENCODER_D_2, ENCODER_D_REV);
 	
 	encoderA->Reset();
     encoderB->Reset();
-    encoderC->Reset();
-    encoderD->Reset();
+    //encoderC->Reset();
+    //encoderD->Reset();
     
     encoderA->Start();
     encoderB->Start();
-    encoderC->Start();
-    encoderD->Start();
+    //encoderC->Start();
+    //encoderD->Start();
     
     gyro->SetSensitivity(-Gyro::kDefaultVoltsPerDegreePerSecond);
     gyro->SetPIDSourceParameter(Gyro :: kAngle);
@@ -33,9 +33,9 @@ Chassis::Chassis():Subsystem("Chassis"),gyro(new Gyro(GYRO_PORT)){
     gyro_pid->SetOutputRange(-3.1415, 3.1415);
     gyro_pid->Enable();
     
-    mpu = new lib4774::MPU6050(MPU6050_ADDRESS_AD0_LOW); // GY-521 has MPU-6050 set to AD0 low.
+    //mpu = new lib4774::MPU6050(MPU6050_ADDRESS_AD0_LOW); // GY-521 has MPU-6050 set to AD0 low.
     
-    mpu->dmpInitialize();
+    //mpu->dmpInitialize();
     
     /*mpu->setXGyroOffset(5000);//45.5);
     mpu->setYGyroOffset(-22.5);//-22.5;
@@ -64,8 +64,8 @@ Chassis::~Chassis() {
 	
 	delete encoderA;
 	delete encoderB;
-	delete encoderC;
-	delete encoderD;
+	//delete encoderC;
+	//delete encoderD;
 	delete gyro;
 }
 
@@ -140,24 +140,24 @@ void Chassis::drive(double vX, double vY, double vZ, double throttle, bool weBeP
     SmartDashboard::PutNumber("Gyro(rate)", gyro->GetRate());
     SmartDashboard::PutNumber("EncoderA(counts)", encoderA->Get());
 	SmartDashboard::PutNumber("EncoderB(counts)", encoderB->Get());
-	SmartDashboard::PutNumber("EncoderC(counts)", encoderC->Get());
-	SmartDashboard::PutNumber("EncoderD(counts)", encoderD->Get());
+	//SmartDashboard::PutNumber("EncoderC(counts)", encoderC->Get());
+	//SmartDashboard::PutNumber("EncoderD(counts)", encoderD->Get());
 	SmartDashboard::PutNumber("EncoderA(speed)", encoderA->GetRate());
 	SmartDashboard::PutNumber("EncoderB(speed)", encoderB->GetRate());
-	SmartDashboard::PutNumber("EncoderC(speed)", encoderC->GetRate());
-	SmartDashboard::PutNumber("EncoderD(speed)", encoderD->GetRate());
-    SmartDashboard::PutNumber("MPU6050_frc(deg)", mpu->getRotationZ());
+	//SmartDashboard::PutNumber("EncoderC(speed)", encoderC->GetRate());
+	//SmartDashboard::PutNumber("EncoderD(speed)", encoderD->GetRate());
+    //SmartDashboard::PutNumber("MPU6050_frc(deg)", mpu->getRotationZ());
     SmartDashboard::PutNumber("GyroPID", correction->correction);
-    SmartDashboard::PutNumber("X gyro offset", mpu->getXGyroOffset());
+    //SmartDashboard::PutNumber("X gyro offset", mpu->getXGyroOffset());
     //SmartDashboard::PutNumber("Get Y gyro offset", mpu->getYGyroOffset());
-    SmartDashboard::PutNumber("Get Z gyro offset", mpu->getZGyroOffset());
+    //SmartDashboard::PutNumber("Get Z gyro offset", mpu->getZGyroOffset());
     //SmartDashboard::PutNumber("Get X accel offset", mpu->getXAccelOffset());
     //SmartDashboard::PutNumber("Get Y accel offset", mpu->getYAccelOffset());
     //SmartDashboard::PutNumber("Get Z accel offset", mpu->getZAccelOffset());
     
     loopcounter ++;
     
-    if (loopcounter == 20){
+    /*if (loopcounter == 20){
         SmartDashboard::PutNumber("X Rotation", gyroX/loopcounter);
         SmartDashboard::PutNumber("Y Rotation", gyroY/loopcounter);
         SmartDashboard::PutNumber("Z Rotation", gyroZ/loopcounter);
@@ -174,7 +174,7 @@ void Chassis::drive(double vX, double vY, double vZ, double throttle, bool weBeP
         accX += mpu->getAccelerationX() - 157.79;
         accY += mpu->getAccelerationY() + 14.74;
         accZ += mpu->getAccelerationZ() + 264.6;
-    }
+    }*/
 }
 
 void Chassis::InitDefaultCommand() {
@@ -191,6 +191,6 @@ void Chassis::liveWindow() {
 	lw->AddSensor("Chassis", "Gyro(deg)", gyro);
 	lw->AddSensor("Chassis", "EncoderA",  encoderA);
 	lw->AddSensor("Chassis", "EncoderB",  encoderB);
-	lw->AddSensor("Chassis", "EncoderC",  encoderC);
-	lw->AddSensor("Chassis", "EncoderD",  encoderD);
+	//lw->AddSensor("Chassis", "EncoderC",  encoderC);
+	//lw->AddSensor("Chassis", "EncoderD",  encoderD);
 }

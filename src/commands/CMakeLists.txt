@@ -20,4 +20,5 @@ add_sources(
   ChopsticksStop.cpp
   ChopsticksDrop.cpp
   BallTrapClose.cpp
+  BallTrapOpen.cpp
 )

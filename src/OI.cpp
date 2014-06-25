@@ -11,7 +11,8 @@
 #include "commands/WinchRetract.h"
 #include "commands/WinchOpen.h"
 #include "commands/QuickReleaseClose.h"
-
+#include "commands/BallTrapClose.h"
+#include "commands/BallTrapOpen.h"
 
 OI::OI() {
 	// Process operator interface input here.
@@ -57,6 +58,12 @@ OI::OI() {
 	
 	qrCloseButton = new JoystickButton(joyDrv, QR_CLOSE_BUTTON);
 	qrCloseButton->WhileHeld(new QuickReleaseClose());
+    
+    ballTrapCloseButtonOpr = new JoystickButton(joyOpr, BALL_TRAP_CLOSE_OPR_BUTTON);
+    ballTrapCloseButtonOpr->WhileHeld(new BallTrapClose());
+    
+    ballTrapOpenButtonOpr = new JoystickButton (joyOpr, BALL_TRAP_OPEN_OPR_BUTTON);
+    ballTrapOpenButtonOpr->WhileHeld(new BallTrapOpen());
 
 }
 

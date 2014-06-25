@@ -15,7 +15,7 @@ void ChopsticksMoveUp::Execute(){
 }
 
 bool ChopsticksMoveUp::IsFinished(){
-	return false;
+    return forklift->encoder->Get() < 0;
 }
 
 void ChopsticksMoveUp::End(){

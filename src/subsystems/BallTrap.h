@@ -7,11 +7,9 @@ class BallTrap : public Subsystem {
     public:
         BallTrap();
         ~BallTrap();
-        void moveRightTrap(double speed);
-        void moveLeftTrap(double speed);
+        void moveTrap(double speed);
     private:
-        Victor* leftballtrapmotor;
-        Victor* rightballtrapmotor;
+        Victor* balltrapmotor;
 };
 
 #endif

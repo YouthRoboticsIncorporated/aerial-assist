@@ -21,5 +21,5 @@ void ChopsticksPickUp::End(){
 }
 
 void ChopsticksPickUp::Interrupted(){
-	chopsticks->spinChopsticks (0.0);
+	chopsticks->spinChopsticks (0.0);;
 }	
