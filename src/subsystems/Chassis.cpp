@@ -33,7 +33,24 @@ Chassis::Chassis():Subsystem("Chassis"),gyro(new Gyro(GYRO_PORT)){
     gyro_pid->SetOutputRange(-3.1415, 3.1415);
     gyro_pid->Enable();
     
-    //mpu = new lib4774::MPU6050(MPU6050_ADDRESS_AD0_LOW); // GY-521 has MPU-6050 set to AD0 low.
+    mpu = new lib4774::MPU6050(MPU6050_ADDRESS_AD0_LOW); // GY-521 has MPU-6050 set to AD0 low.
+    
+    mpu->dmpInitialize();
+    
+    /*mpu->setXGyroOffset(5000);//45.5);
+    mpu->setYGyroOffset(-22.5);//-22.5;
+    mpu->setZGyroOffset(43);
+    mpu->setXAccelOffset(5000);//-157.79;
+    mpu->setYAccelOffset(14.74);
+    mpu->setZAccelOffset(264.6);*/
+    
+    loopcounter = 0;
+    gyroX = 0;
+    gyroY = 0;
+    gyroZ = 0;
+    accX = 0;
+    accY = 0;
+    accZ = 0;
     
     // Add to Live Window
     liveWindow();
@@ -129,9 +146,35 @@ void Chassis::drive(double vX, double vY, double vZ, double throttle, bool weBeP
 	SmartDashboard::PutNumber("EncoderB(speed)", encoderB->GetRate());
 	SmartDashboard::PutNumber("EncoderC(speed)", encoderC->GetRate());
 	SmartDashboard::PutNumber("EncoderD(speed)", encoderD->GetRate());
-    //SmartDashboard::PutNumber("MPU6050_frc(deg)", mpu->getRotationZ());
+    SmartDashboard::PutNumber("MPU6050_frc(deg)", mpu->getRotationZ());
     SmartDashboard::PutNumber("GyroPID", correction->correction);
-
+    SmartDashboard::PutNumber("X gyro offset", mpu->getXGyroOffset());
+    //SmartDashboard::PutNumber("Get Y gyro offset", mpu->getYGyroOffset());
+    SmartDashboard::PutNumber("Get Z gyro offset", mpu->getZGyroOffset());
+    //SmartDashboard::PutNumber("Get X accel offset", mpu->getXAccelOffset());
+    //SmartDashboard::PutNumber("Get Y accel offset", mpu->getYAccelOffset());
+    //SmartDashboard::PutNumber("Get Z accel offset", mpu->getZAccelOffset());
+    
+    loopcounter ++;
+    
+    if (loopcounter == 20){
+        SmartDashboard::PutNumber("X Rotation", gyroX/loopcounter);
+        SmartDashboard::PutNumber("Y Rotation", gyroY/loopcounter);
+        SmartDashboard::PutNumber("Z Rotation", gyroZ/loopcounter);
+        SmartDashboard::PutNumber("X Acceleration", accX/loopcounter);
+        SmartDashboard::PutNumber("Y Acceleration", accY/loopcounter);
+        SmartDashboard::PutNumber("Z Acceleration", accZ/loopcounter);
+        
+        loopcounter = 0;
+        gyroX = gyroY = gyroZ = accX = accY = accZ = 0;
+    }   else {
+        gyroX += mpu->getRotationX() + 22.75;
+        gyroY += mpu->getRotationY() - 22.5;
+        gyroZ += mpu->getRotationZ() + 43;
+        accX += mpu->getAccelerationX() - 157.79;
+        accY += mpu->getAccelerationY() + 14.74;
+        accZ += mpu->getAccelerationZ() + 264.6;
+    }
 }
 
 void Chassis::InitDefaultCommand() {

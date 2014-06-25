@@ -24,7 +24,9 @@ class Chassis: public Subsystem {
 		Gyro *gyro;
         GyroCorrection *correction;
         PIDController *gyro_pid;
-        //lib4774::MPU6050 *mpu;
+        lib4774::MPU6050 *mpu;
+        int loopcounter;
+        double accX, accY, accZ, gyroX, gyroY, gyroZ;
 };
 
 #endif
