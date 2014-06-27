@@ -13,6 +13,7 @@
 #include "commands/QuickReleaseClose.h"
 #include "commands/BallTrapClose.h"
 #include "commands/BallTrapOpen.h"
+#include "commands/TogglePimpin.h"
 
 OI::OI() {
 	// Process operator interface input here.
@@ -64,6 +65,9 @@ OI::OI() {
     
     ballTrapOpenButtonOpr = new JoystickButton (joyOpr, BALL_TRAP_OPEN_OPR_BUTTON);
     ballTrapOpenButtonOpr->WhileHeld(new BallTrapOpen());
+        
+    pimpButton = new JoystickButton (joyOpr, PIMP_ROLL_BUTTON);
+    pimpButton->WhenPressed(new TogglePimpin());
 
 }
 
@@ -94,6 +98,3 @@ double OI::getJoyDrvThrottle(){
 	return -(joyDrv->GetTwist()-1.0)/2.0;
 }
 
-bool OI::weBePimpin(){
-	return joyDrv->GetRawButton(PIMP_ROLL_BUTTON);
-}

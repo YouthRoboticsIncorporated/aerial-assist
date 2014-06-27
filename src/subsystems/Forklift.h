@@ -8,7 +8,6 @@ class Forklift: public Subsystem {
 		Forklift();
 		~Forklift();
 		void moveForklift(double speed);
-        Encoder* encoder;
         
 		
 	private:

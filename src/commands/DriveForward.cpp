@@ -3,7 +3,7 @@
 
 DriveForward::DriveForward():CommandBase("DriveForward"){
 	Requires(chassis);
-	SetTimeout(3);
+	SetTimeout(3.9);
 }
 
 void DriveForward::Initialize(){	
@@ -11,12 +11,19 @@ void DriveForward::Initialize(){
 }
 
 void DriveForward::Execute(){
-	chassis->drive(1, 0, 0, 0.40, true);
+	chassis->drive(1, 0, 0, 0.80);
     
 }
 
 bool DriveForward::IsFinished(){
-	return IsTimedOut() || beaglebone->goalRange != 99.0;
+    
+    double AB = max(chassis->encoderA->Get(), chassis->encoderB->Get());
+    
+    double CD = max(chassis->encoderC->Get(), chassis->encoderD->Get());
+    
+    double Avg = max (AB, CD); 
+    
+	return IsTimedOut() || abs(Avg) > 2560;
 }
 
 void DriveForward::End(){

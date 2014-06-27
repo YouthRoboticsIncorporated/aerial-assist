@@ -21,4 +21,6 @@ add_sources(
   ChopsticksDrop.cpp
   BallTrapClose.cpp
   BallTrapOpen.cpp
+  TogglePimpin.cpp
+  DriveWinch.cpp
 )

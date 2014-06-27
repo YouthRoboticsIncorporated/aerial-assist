@@ -26,7 +26,7 @@ void FindPosition::Execute(){
 		double vX = speed*cos(heading); 
 		double vY = speed*sin(heading);
 		double vZ = heading/100.0;
-		chassis->drive(vX,vY,vZ,0.75,false);
+		chassis->drive(vX,vY,vZ,0.75);
 	}
 }
 

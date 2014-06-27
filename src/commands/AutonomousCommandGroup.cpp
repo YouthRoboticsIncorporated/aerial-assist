@@ -1,12 +1,16 @@
 #include "AutonomousCommandGroup.h"
-#include "DriveForward.h"
-#include "ThrowBall.h"
+#include "QuickReleaseClose.h"
+#include "QuickReleaseOpen.h"
 #include "FindPosition.h"
 #include "ChopsticksDrop.h"
+#include "DriveWinch.h"
+#include "WinchRetract.h"
 
 AutonomousCommandGroup::AutonomousCommandGroup() {
-	AddSequential (new DriveForward());
+	AddSequential (new DriveWinch());
 	AddSequential (new ChopsticksDrop());
 	//AddSequential (new FindPosition());
-	AddSequential (new ThrowBall());
+	AddSequential(new QuickReleaseOpen());
+	AddSequential(new QuickReleaseClose());
+	AddSequential(new WinchRetract());
 }

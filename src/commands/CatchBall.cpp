@@ -22,9 +22,8 @@ void CatchBall::Execute(){
 		double y = oi->getJoyDrvY();
 		double z = oi->getJoyDrvZ();
 		double throttle = oi->getJoyDrvThrottle();
-		bool weBePimpin = oi->weBePimpin();
    
-		chassis->drive(x, y, z, throttle,weBePimpin);
+		chassis->drive(x, y, z, throttle);
 	}
 }
 

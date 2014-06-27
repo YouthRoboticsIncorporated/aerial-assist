@@ -10,18 +10,26 @@ class Chassis: public Subsystem {
 		Chassis();
 		~Chassis();
 		void InitDefaultCommand();
-		void drive(double vX, double vY, double vR, double throttle, bool weBePimpin = false);
+		void drive(double vX, double vY, double vR, double throttle);
+
 		Victor* driveMotorA;
 		Victor* driveMotorB;
 		Victor* driveMotorC;
 		Victor* driveMotorD;
         
+        bool weBePimpin;
+        
+        Encoder *encoderA, *encoderB, *encoderC, *encoderD;
+        
+        double SetHeading;
 	private:
 		
 		void liveWindow();
 
-		Encoder *encoderA, *encoderB; //*encoderC, *encoderD;
 		
+		
+       
+        
 		Gyro *gyro;
         GyroCorrection *correction;
         PIDController *gyro_pid;

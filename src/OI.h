@@ -24,6 +24,7 @@ private:
 	Button* chopsticksMoveUpButtonOpr;
     Button* ballTrapCloseButtonOpr;
     Button* ballTrapOpenButtonOpr;
+    Button* pimpButton;
 	
 
 public:
@@ -35,7 +36,6 @@ public:
 	double getJoyDrvY();
 	double getJoyDrvZ();
 	double getJoyDrvThrottle();
-	bool weBePimpin();
 };
 
 #endif
