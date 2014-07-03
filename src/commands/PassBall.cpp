@@ -6,8 +6,11 @@
 
 
 PassBall::PassBall(){
-	AddSequential(new QuickReleaseOpen());
+    AddSequential(new WinchRetract());
+    AddSequential(new QuickReleaseOpen());
 	AddSequential(new WinchPayout());
 	AddSequential(new QuickReleaseClose());
-	AddSequential(new WinchRetract());
+    AddSequential(new WinchRetract());
+    AddSequential(new WinchPayout());
+
 }

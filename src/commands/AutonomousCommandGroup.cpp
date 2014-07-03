@@ -5,6 +5,7 @@
 #include "ChopsticksDrop.h"
 #include "DriveWinch.h"
 #include "WinchRetract.h"
+#include "WinchPayout.h"
 
 AutonomousCommandGroup::AutonomousCommandGroup() {
 	AddSequential (new DriveWinch());
@@ -13,4 +14,5 @@ AutonomousCommandGroup::AutonomousCommandGroup() {
 	AddSequential(new QuickReleaseOpen());
 	AddSequential(new QuickReleaseClose());
 	AddSequential(new WinchRetract());
+    AddSequential(new WinchPayout());
 }
